@@ -9,6 +9,7 @@ module.exports = (req, res) => {
         target = 'http://backend-api-02.newbee.ltd/manage-api/v1'
     }
 
+    console.log('proxyproxy');
     // 创建代理对象并转发请求
     createProxyMiddleware({
         target,
