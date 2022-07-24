@@ -15,6 +15,7 @@ export default defineConfig({
   Components({
     resolvers: [ElementPlusResolver()],
   }),],
+  base: './',
   resolve: {
     alias: {
       '~': path.resolve(__dirname, './'),
