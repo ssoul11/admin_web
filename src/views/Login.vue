@@ -130,8 +130,9 @@ const submitForm = (formEl: FormInstance | undefined) => {
           // 返回的时候会有一个 token，这个令牌就是我们后续去请求别的接口时要带上的，否则会报错，非管理员。
           // 这里我们将其存储到 localStorage 里面。
           localSet("token", res);
+          console.log(res);
           // 此处登录完成之后，需要刷新页面
-          window.location.href = "/";
+          // window.location.href = "/";
         });
     } else {
       console.log("error submit!");
