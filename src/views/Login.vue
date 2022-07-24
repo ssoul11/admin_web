@@ -134,7 +134,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
           localSet("token", res);
           console.log(res);
           // 此处登录完成之后，需要刷新页面
-          window.location.href = "/";
+          // window.location.href = "/";
         });
     } else {
       console.log("error submit!");
