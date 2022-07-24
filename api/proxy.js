@@ -9,15 +9,14 @@ module.exports = (req, res) => {
         target = 'http://backend-api-02.newbee.ltd/manage-api/v1'
     }
 
-    console.log('proxyproxy');
-    // 创建代理对象并转发请求
-    createProxyMiddleware({
-        target,
-        changeOrigin: true,
-        pathRewrite: {
-            // 通过路径重写，去除请求路径中的 `/backend`
-            // 例如 /backend/user/login 将被转发到 http://backend-api.com/user/login
-            '^/api/': '/'
-        }
-    })(req, res)
+    // // 创建代理对象并转发请求
+    // createProxyMiddleware({
+    //     target,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //         // 通过路径重写，去除请求路径中的 `/backend`
+    //         // 例如 /backend/user/login 将被转发到 http://backend-api.com/user/login
+    //         '^/api/': '/'
+    //     }
+    // })(req, res)
 }
