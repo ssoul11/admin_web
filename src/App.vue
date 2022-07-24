@@ -70,8 +70,7 @@
 import Header from "./components/Header.vue";
 import router from "./router/index.js";
 import { localGet, pathMap } from "./utils/index.js";
-import { ref } from "vue";
-
+import { onMounted, ref } from "vue";
 // const handleOpen = (key: string, keyPath: string[]) => {
 //   console.log(key, keyPath);
 // };
