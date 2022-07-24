@@ -123,7 +123,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       // /adminUser/login 登录接口路径
       console.log(111111);
       axios
-        .post("/adminUser/login", {
+        .post("/backend/adminUser/login", {
           userName: ruleForm.name || "",
           passwordMd5: md5(ruleForm.pass), // 密码需要 md5 加密
         })
