@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.0.0",
+    "@wangeditor/editor": "^5.1.12",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "element-plus": "^2.0.3",
     "js-md5": "^0.7.3",
     "vue": "^3.2.25",

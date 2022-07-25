@@ -25,7 +25,7 @@
           <img
             style="width: 100px; height: 100px"
             :key="scope.row.goodsId"
-            :src="$filters.prefix(scope.row.goodsCoverImg)"
+            :src="scope.row.goodsCoverImg"
             alt="商品主图"
           />
         </template>
@@ -74,3 +74,80 @@
     />
   </el-card>
 </template>
+<script>
+import { onMounted, onUpdated, reactive, ref, toRefs } from "vue";
+import axios from "@/utils/axios";
+import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
+import { getCurrentInstance } from "vue";
+export default {
+  name: "Good", // 养成好习惯，每次新建页面，都要对 name 进行语义化的编辑，对代码的整洁度很有帮助。
+  setup() {
+    const router = useRouter(); // 获取路由实例，内涵路由相关的各种方法。
+    const state = reactive({
+      loading: false, // 列表数据接口返回前的 loadinig
+      tableData: [], // 数据列表
+      total: 0, // 总条数
+      currentPage: 1, // 当前页
+      pageSize: 10, // 分页大小
+    });
+    const { proxy } = getCurrentInstance();
+    // 初始化钩子函数
+    onMounted(() => {
+      getGoodList();
+    });
+    // 获取轮播图列表
+    const getGoodList = () => {
+      state.loading = true;
+      axios
+        .get("/goods/list", {
+          params: {
+            pageNumber: state.currentPage, // 当前页
+            pageSize: state.pageSize, // 每页数量
+          },
+        })
+        .then((res) => {
+          state.tableData = res.list; // 列表数据
+          state.total = res.totalCount; // 数据总条数
+          state.currentPage = res.currPage; // 当前页
+          state.loading = false; // 数据成功返回后，将列表 loading 清除
+          proxy.goTop(); // 数据获取成功后，回到顶部
+        });
+    };
+    // 添加商品，跳转到 /add 路径下
+    const handleAdd = () => {
+      router.push({ path: "/add" });
+    };
+    // 编辑商品，带 id 跳转 /add 路径
+    const handleEdit = (id) => {
+      router.push({ path: "/add", query: { id } });
+    };
+    // 翻页方法
+    const changePage = (val) => {
+      state.currentPage = val;
+      getGoodList();
+    };
+    // 上下架方法
+    const handleStatus = (id, status) => {
+      axios
+        .put(`/goods/status/${status}`, {
+          ids: id ? [id] : [],
+        })
+        .then(() => {
+          ElMessage.success("修改成功");
+          getGoodList();
+        });
+    };
+
+    // template 用到的方法变量，都需要在 setup 函数内 return 出去
+    return {
+      ...toRefs(state),
+      handleAdd,
+      handleEdit,
+      getGoodList,
+      changePage,
+      handleStatus,
+    };
+  },
+};
+</script>

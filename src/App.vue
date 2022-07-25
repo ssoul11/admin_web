@@ -5,7 +5,7 @@
         <el-col :span="12">
           <h5 class="mb-2">Shop-Admin</h5>
           <el-menu
-            default-active="/"
+            :default-active="path"
             class="el-menu-vertical-demo"
             :unique-opened="true"
             :router="true"
@@ -36,9 +36,9 @@
                 <span>模块管理</span>
               </template>
               <el-menu-item index="/category">分类管理</el-menu-item>
-              <el-menu-item index="3-2">商品管理</el-menu-item>
-              <el-menu-item index="3-3">会员管理</el-menu-item>
-              <el-menu-item index="3-4">订单管理</el-menu-item>
+              <el-menu-item index="/good">商品管理</el-menu-item>
+              <el-menu-item index="/guest">会员管理</el-menu-item>
+              <el-menu-item index="/order">订单管理</el-menu-item>
             </el-sub-menu>
 
             <el-sub-menu index="4">
@@ -46,7 +46,7 @@
                 <!-- <el-icon><location /></el-icon> -->
                 <span>系统管理</span>
               </template>
-              <el-menu-item index="4-1">修改密码</el-menu-item>
+              <el-menu-item index="/account">修改密码</el-menu-item>
             </el-sub-menu>
           </el-menu>
         </el-col>
@@ -79,6 +79,7 @@ import { onMounted, ref } from "vue";
 // };
 let showMenu = ref(false);
 let title = ref(null);
+let path = ref(null);
 
 router.beforeEach((to, from, next) => {
   if (to.path == "/login") {
@@ -88,6 +89,7 @@ router.beforeEach((to, from, next) => {
       next("/login");
     } else {
       next();
+      path.value = to.path;
     }
   }
   showMenu.value = !(to.path == "/login");
