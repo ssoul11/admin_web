@@ -123,7 +123,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       // /adminUser/login 登录接口路径
       console.log(111111);
       axios
-        .post("/api/adminUser/login", {
+        .post("/adminUser/login", {
           userName: ruleForm.name || "",
           passwordMd5: md5(ruleForm.pass), // 密码需要 md5 加密
         })
@@ -134,7 +134,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
           localSet("token", res);
           console.log(res);
           // 此处登录完成之后，需要刷新页面
-          window.location.href = "/";
+          // window.location.href = "/";
         });
     } else {
       console.log("error submit!");
