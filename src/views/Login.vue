@@ -30,17 +30,14 @@
           :size="formSize"
         >
           <el-form-item label="用户名" prop="name">
-            <el-input
-              v-model="ruleForm.name"
-              placeholder="Please input username"
-            ></el-input>
+            <el-input v-model="ruleForm.name" placeholder="admin"></el-input>
           </el-form-item>
 
           <el-form-item label="密码" prop="pass">
             <el-input
               v-model="ruleForm.pass"
               type="password"
-              placeholder="Please input password"
+              placeholder="123456"
               show-password
             />
           </el-form-item>

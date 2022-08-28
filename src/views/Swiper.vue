@@ -10,6 +10,7 @@
     </div>
     <el-divider></el-divider>
     <el-table
+      v-loading="state.loading"
       :data="state.tableData"
       stripe
       height="475"
@@ -38,10 +39,27 @@
           }}</a>
         </template>
       </el-table-column>
-
       <el-table-column prop="carouselRank" label="排序值" />
       <el-table-column prop="createTime" label="添加时间" />
-      <el-table-column label="操作" width="180" />
+      <el-table-column label="操作" width="180">
+        <template #default="scope">
+          <a
+            style="cursor: pointer; margin-right: 10px; color: #53a8ff"
+            @click="handleEdit(scope.row.carouselId)"
+            >修改</a
+          >
+          <el-popconfirm
+            title="确定删除吗？"
+            confirmButtonText="确定"
+            cancelButtonText="取消"
+            @confirm="handleDeleteOne(scope.row.carouselId)"
+          >
+            <template #reference>
+              <a style="cursor: pointer; color: #53a8ff">删除</a>
+            </template>
+          </el-popconfirm>
+        </template></el-table-column
+      >
     </el-table>
 
     <el-pagination
@@ -96,15 +114,22 @@ async function getCarousels() {
   state.currentPage = res.currPage;
   state.totalPage = res.totalPage;
   // console.log(res);
-  // console.log(state.tableData);
+  console.log(state.tableData);
 }
+
+// 添加轮播图
 const handleAdd = function () {
   state.type = "add";
   addSwiper.value.open();
   // console.log(addSwiper.value.token);
   // console.log(addSwiper.value.tag);
 };
-
+// 修改轮播图
+const handleEdit = function (id) {
+  console.log(id);
+  state.type = "edit";
+  addSwiper.value.open(id);
+};
 const selectChange = function (val) {
   // console.log(val);
   state.selectData = val;

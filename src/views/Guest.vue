@@ -64,7 +64,6 @@ export default {
   setup() {
     const table = ref(null); // 绑定 Table  的 ref 属性
     // 解禁方法
-
     const handleSolve = () => {
       // 可以通过 table 获取到组件内部的 multipleSelection 值
       if (!table.value.multipleSelection.length) {

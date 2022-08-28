@@ -25,7 +25,7 @@
           <img
             style="width: 100px; height: 100px"
             :key="scope.row.goodsId"
-            :src="scope.row.goodsCoverImg"
+            :src="$filters.prefix(scope.row.goodsCoverImg)"
             alt="商品主图"
           />
         </template>

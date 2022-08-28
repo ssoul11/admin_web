@@ -105,6 +105,8 @@ onMounted(() => {
 });
 async function getCategory() {
   const { level = 1, parent_id = 0 } = route.query;
+  state.level = level;
+  state.parent_id = parent_id;
   state.loading = true;
   const res = await axios.get("/categories", {
     params: {
@@ -198,13 +200,13 @@ const handleSelectionChange = (val) => {
   state.multipleSelection = val;
 };
 
-const unwatch = router.afterEach((to, from) => {
+const unwatch = router.afterEach((to, from, next) => {
   // to and from are both route objects. must call `next`.
   console.log(to.name);
   if (["category", "level2", "level3"].includes(to.name)) {
     getCategory();
   }
-  // next();
+  next();
 });
 
 onUnmounted(() => {

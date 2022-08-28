@@ -96,7 +96,7 @@ const tag = "66666";
 //   visible = props.Dialog;
 // });
 
-let ruleForm = reactive({
+const ruleForm = reactive({
   url: "",
   link: "",
   sort: "",
@@ -109,11 +109,9 @@ const rules = reactive({
 // 获取详情
 const getDetail = (id) => {
   axios.get(`/carousels/${id}`).then((res) => {
-    ruleForm = {
-      url: res.carouselUrl,
-      link: res.redirectUrl,
-      sort: res.carouselRank,
-    };
+    ruleForm.url = res.carouselUrl;
+    ruleForm.link = res.redirectUrl;
+    ruleForm.sort = res.carouselRank;
   });
 };
 // 上传之前，控制上传的文件。

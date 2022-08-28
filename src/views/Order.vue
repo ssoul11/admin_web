@@ -198,6 +198,7 @@ export default {
     };
     // 触发过滤项方法
     const handleOption = () => {
+      console.log(state.orderStatus);
       state.currentPage = 1;
       getOrderList();
     };
@@ -292,3 +293,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+.header >>> .el-input {
+  width: 200px;
+}
+a {
+  text-decoration: none; /* 去除默认的下划线 */
+}
+</style>
